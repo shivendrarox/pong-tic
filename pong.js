@@ -25,7 +25,25 @@ function init(){
    max : 1.5
   }
  };
-	
+	//////////////bricks//////////
+//bricks
+ var bricks = [];
+var  brickCountWidth = 19;
+var  brickCountHeight = 12;
+
+ //create bricks
+ for(var i=0;i<= brickCountHeight;i=i+1){
+  for(var j=0;j<= brickCountWidth;j=j+1){
+   var brick = {
+    x : 10+j*11,
+    y : 10+i*5,
+    width : 10,
+    height : 4,
+    color : i+1
+   };
+ 	bricks.push(brick);
+  }
+ }	
 }
 init();
 
