@@ -3,9 +3,11 @@
 // desc: ghsjsj
 // script: js
 
-var bricks;
-var brick;
+var bricks=[];
+//var brick;
+//var score;
 function init(){
+	score=0;
 	lives=3;
 	player = 
 		{ x : (240/2)-12, 
@@ -31,14 +33,14 @@ function init(){
 	//////////////bricks//////////
 //bricks
 //var
- bricks = [];
+//  bricks = [];
 var brickCountWidth = 19;
 var brickCountHeight = 12;
 
  //create bricks
 for(var i=0;i<= brickCountHeight;i=i+1){
  for(var j=0;j<= brickCountWidth;j=j+1){
-  // var
+   var
 			 brick = {
     x : 10+j*11,
     y : 10+i*5,
@@ -56,7 +58,7 @@ init();
 
 function TIC(){
 	cls(13);
-		print(bricks[0].x,84,84);
+		print(bricks.length,84,84);
 input();
 if (lives>0){
 	update();
@@ -147,14 +149,14 @@ function drawGameObjects(){
   ball.height,
   ball.color);
 /////////////bricxx////////////
-	for (var i=0;i<=259;i++){
-  rect(bricks[i].x,
-       bricks[i].y,
-       bricks[i].width,
-       bricks[i].height,
-       bricks[i].color);
-								print(bricks.length,74,74);
- }	
+	bricks.forEach(function(brick){
+  rect(brick.x,
+       brick.y,
+       brick.width,
+       brick.height,
+       brick.color);
+							//	print(bricks.length,74,74);
+ });	
 
 }
 function drawGUI(){
@@ -169,6 +171,8 @@ function collisions(){
 	playerBallCollision();
 	//
 	ballGroundCollision();
+	//
+	ballBrickCollision()
 }
 function playerWallCollision(){
  if (player.x<0){
@@ -242,4 +246,37 @@ function gameOver(){
   if(btn(5)){
    init();
   }
+}
+
+function ballBrickCollision(){
+ bricks.forEach(function(brick){
+ // get parameter
+		
+  var x = brick.x;
+  var y = brick.y;
+  var w = brick.width;
+  var h = brick.height;
+
+  // check collision
+  if(collide(ball, brick)){
+   // collide left or right side
+   if((y < ball.y) &&
+    (ball.y < y+h) &&
+    (ball.x < x) ||
+    (x+w < ball.x)){
+    ball.speed.x = -ball.speed.x;
+   }
+   //collide top or bottom side		
+   if((ball.y<y)||
+    	(ball.y>y)&&
+   		(x<ball.x)&&
+    	(ball.x<x+w)){
+    ball.speed.y = -ball.speed.y;
+   }
+		//bug below	
+  delete bricks.brick;
+   score = score + 1;
+  }
+	
+ });
 }
