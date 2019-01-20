@@ -2,6 +2,9 @@
 // author: someone
 // desc: ghsjsj
 // script: js
+
+var bricks;
+var brick;
 function init(){
 	lives=3;
 	player = 
@@ -27,14 +30,16 @@ function init(){
  };
 	//////////////bricks//////////
 //bricks
- var bricks = [];
-var  brickCountWidth = 19;
-var  brickCountHeight = 12;
+//var
+ bricks = [];
+var brickCountWidth = 19;
+var brickCountHeight = 12;
 
  //create bricks
- for(var i=0;i<= brickCountHeight;i=i+1){
-  for(var j=0;j<= brickCountWidth;j=j+1){
-   var brick = {
+for(var i=0;i<= brickCountHeight;i=i+1){
+ for(var j=0;j<= brickCountWidth;j=j+1){
+  // var
+			 brick = {
     x : 10+j*11,
     y : 10+i*5,
     width : 10,
@@ -43,12 +48,15 @@ var  brickCountHeight = 12;
    };
  	bricks.push(brick);
   }
- }	
+ }
+	///////////////
+	
 }
 init();
 
 function TIC(){
 	cls(13);
+		print(bricks[0].x,84,84);
 input();
 if (lives>0){
 	update();
@@ -138,6 +146,16 @@ function drawGameObjects(){
   ball.width,
   ball.height,
   ball.color);
+/////////////bricxx////////////
+	for (var i=0;i<=259;i++){
+  rect(bricks[i].x,
+       bricks[i].y,
+       bricks[i].width,
+       bricks[i].height,
+       bricks[i].color);
+								print(bricks.length,74,74);
+ }	
+
 }
 function drawGUI(){
 }
@@ -146,6 +164,7 @@ function collisions(){
  playerWallCollision();
 	//
 	ballWallCollision();
+
 	//
 	playerBallCollision();
 	//
