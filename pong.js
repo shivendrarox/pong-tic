@@ -57,8 +57,9 @@ for(var i=0;i<= brickCountHeight;i=i+1){
 init();
 
 function TIC(){
-	cls(13);
+	cls(16);
 		print(bricks.length,84,84);
+			print(score,80,80);
 input();
 if (lives>0){
 	update();
@@ -155,7 +156,7 @@ function drawGameObjects(){
        brick.width,
        brick.height,
        brick.color);
-							//	print(bricks.length,74,74);
+							print("x",brick.x,brick.y);
  });	
 
 }
@@ -273,9 +274,9 @@ function ballBrickCollision(){
     	(ball.x<x+w)){
     ball.speed.y = -ball.speed.y;
    }
-		//bug below	
-  delete bricks.brick;
-   score = score + 1;
+		//fixedd!!
+  bricks.splice(bricks.indexOf(brick),1);
+  score = score + 1;
   }
 	
  });
